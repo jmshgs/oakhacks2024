@@ -1,4 +1,5 @@
 <script>
+	import Button from "$lib/components/ui/button/button.svelte";
 	import { onMount } from "svelte";
 
 	export let titles;
@@ -43,7 +44,8 @@
 
 <div class="">
 <div class="inline-flex">
-	<h1 class="flex-row"><br>{currentWord}</h1>
+	<h1 class="flex-row">  {currentWord} </h1>
+
 	<p class="anim-keyb h-0">|</p>
 </div>
 </div>
