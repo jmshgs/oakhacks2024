@@ -1,4 +1,9 @@
-# A Svelte Skeleton Project
+# FoodFind
 
+An app made to minimize food waste by allowing users to post their unwanted or surplus food to their local community
 
-`shadcn/ui` and `tailwindcss`
+Technologies used: 
+- svelte-shadcn
+- mapbox
+- tailwind
+- supabase
