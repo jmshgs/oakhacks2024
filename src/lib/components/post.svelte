@@ -1,10 +1,57 @@
+<script>
+	import { Button } from "$lib/components/ui/button";
+	import { ScrollArea } from "$lib/components/ui/scroll-area";
+	import * as Card from "$lib/components/ui/card";
+	import { ArrowUpIcon, ArrowDownIcon } from "svelte-feather-icons";
+	import { Map, Marker } from "@beyonk/svelte-mapbox";
+    import { mode } from "mode-watcher";
+	import {
+    DateFormatter,
+    getLocalTimeZone
+  } from "@internationalized/date";
+
+
+
+
+  const df = new DateFormatter("en-US", {
+    dateStyle: "long"
+  });
+
+  
+    let darkMode = false;
+
+    mode.subscribe((value) => {
+        if (value == "light") {
+            darkMode = false;
+        } else {
+            darkMode = true;
+        }
+    })
+
+	export let title;
+	export let description;
+	export let expiration;
+
+	let upvoted = false;
+	let downvoted = false;
+
+	const toggleUpvote = async () => {
+        upvoted = !upvoted;
+        downvoted = false;
+    };
+	const toggleDownvote = async () => {
+		downvoted = !downvoted;
+        upvoted = false;
+	};
+</script>
+
 <Card.Root class="w-[700px] rounded-2xl h-min">
 	<Card.Header>
-		<Card.Title>Example Title</Card.Title>
+		<Card.Title>{title}</Card.Title>
+		<p class="text-sm pl-1">Expires {df.format(new Date(expiration))}</p>
 	</Card.Header>
 	<Card.Content>
-		<p>uwuwuwuwu</p>
-
+		<p>{description}</p>
 		<div class="h-96">
 			<Map
 				accessToken="pk.eyJ1IjoiY2hpbGRxdWFjayIsImEiOiJjbHM2a2s2dXQwdmVzMmxxaHN0dXEzaGRsIn0.RVy7AMo3FChS0lsSkJcyPg"
@@ -17,15 +64,13 @@
 		</div>
 	</Card.Content>
 	<Card.Footer class="flex justify-start">
-		<Button variant="ghost" onClick={toggleUpvote()} class="hover:bg-transparent">
-            {#if upvoted}
-			<ArrowUpIcon strokeWidth={10} class="hover:stroke-[#9FA4A8]"/>
-            {:else}
-            <ArrowUpIcon strokeWidth={3} class="hover:stroke-[#9FA4A8]"/>
-            {/if}
-		</Button>
-		<Button variant="ghost" onClick={toggleDownvote()} class="hover:bg-transparent">
-			<ArrowDownIcon strokeWidth={3} class="hover:stroke-[#9FA4A8]"/>
-		</Button>
-	</Card.Footer>
+<div class="bg-[#0000000B] dark:bg-[#FFFFFF0B] rounded-[50px]">
+	<Button variant="ghost" on:click={toggleUpvote} class="hover:bg-transparent p-2">
+		<ArrowUpIcon strokeWidth={3} class="{upvoted ? "stroke-[#FF6000]" : ""}"/>
+	</Button>
+	<Button variant="ghost" on:click={toggleDownvote} class="hover:bg-transparent p-2">
+		<ArrowDownIcon strokeWidth={3} class="{downvoted ? "stroke-[#9494ff]" : ""}"/>
+	</Button>
+</div>
+</Card.Footer>
 </Card.Root>

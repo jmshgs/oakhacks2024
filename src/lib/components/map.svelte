@@ -22,11 +22,11 @@
     })
 
 	let marker = null;
-	let latitude = 0;
-	let longitude = 0;
+	export let latitude;
+	export let longitude;
 
-	export let userLongitude = 0;
-	export let userLatitude = 0;
+	let userLatitude = 0;
+	let userLongitude = 0;
 	
 	onMount(() => {
         // console.log(mode)
@@ -71,23 +71,15 @@
 </script>
 <!-- navigation-day-v1, navigation-day-v1-->
 
-	<Map
-		accessToken="pk.eyJ1IjoiY2hpbGRxdWFjayIsImEiOiJjbHM2a2s2dXQwdmVzMmxxaHN0dXEzaGRsIn0.RVy7AMo3FChS0lsSkJcyPg"
-		style={darkMode ? "mapbox://styles/mapbox/navigation-night-v1" : "mapbox://styles/mapbox/navigation-day-v1"}
-		bind:this={mapComponent}
-	
-		zoom={12}>
-		<NavigationControl />
-		<!-- <Marker lat={latitude} lng={longitude} />
-		<Marker
-			lat={userLatitude}
-			lng={userLongitude}
-			color="rgb(0,0,255)"
-			label="You"
-			popup={false} />
-		<Marker lat={latitude} lng={longitude} /> -->
-
-		<!-- <Marker lat={latitude+100} lng={longitude} /> -->
-		
-	</Map>
+<Map
+	accessToken="pk.eyJ1IjoiY2hpbGRxdWFjayIsImEiOiJjbHM2a2s2dXQwdmVzMmxxaHN0dXEzaGRsIn0.RVy7AMo3FChS0lsSkJcyPg"
+	style={darkMode ? "mapbox://styles/mapbox/navigation-night-v1" : "mapbox://styles/mapbox/navigation-day-v1"}
+	bind:this={mapComponent}
+	center={[userLatitude, userLongitude]}
+	zoom={12}>
+	{#if latitude != 0 && longitude != 0}
+		<Marker lat={latitude} lng={longitude} popup={false} />
+	{/if}
+	<Marker lat={userLatitude} lng={userLongitude} popup={false} color="blue"/>
+</Map>
 

@@ -59,18 +59,6 @@
 			variant="ghost"
 			class="justify-start items-start"
 			on:click={() => {
-				goto("/register");
-			}}>
-			<div
-				class="gap-x-5 flex flex-row items-center justify-center text-lg">
-				<UserPlusIcon size="24" />
-				Register
-			</div>
-		</Button>
-		<Button
-			variant="ghost"
-			class="justify-start items-start"
-			on:click={() => {
 				goto("/about");
 			}}>
 			<div

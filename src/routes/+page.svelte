@@ -14,7 +14,7 @@
 
 		<div
 			class="flex flex-col space-x-5 sm:flex-row sm:justify-center sm:space-y-0">
-			<Button href="map" class="h-12" variant="outline">
+			<Button href="posts" class="h-12" variant="outline">
 				Get started
 				<svg
 					class=" w-3.5 h-3.5 ms-2 rtl:rotate-180"
